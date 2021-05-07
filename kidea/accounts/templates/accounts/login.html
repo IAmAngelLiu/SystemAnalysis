@@ -1,6 +1,88 @@
+
 {% extends 'accounts/main.html' %}
 
+
+{% load static %}
+
+
 {% block content %}
+
+
+<style>
+
+body{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+
+.loginbox{
+	width: 320px;
+	height: 420px;
+	background: #000;
+	color: #fff;
+	box-sizing: border-box;
+	margin: 50px 770px;
+}
+
+.loginword{
+	top: 50px;
+	left: calc(50% - 20px);
+}
+
+h1{
+	padding: 20px 0 20px;
+	text-align: center;
+	font-size: 36px;
+}
+
+.loginbox p{
+	margin: 0 20px;
+	padding: 0;
+	font-weight: bold;
+}
+
+.loginbox input{
+	margin: 0 20px;
+	width: 85%;
+	margin-bottom: 20px;
+}
+
+.loginbox input[type="text"], input[type="password"]{
+	outline: none;
+	height: 39px;
+}
+
+.loginbox input[type="submit"]{
+	border: none;
+	outline: none;
+	height: 39px;
+	background: #fb2525;
+	color: #fff;
+	font-size: 18px;
+}
+
+.loginbox input[type="submit"]:hover{
+	cursor:pointer;
+	background: #ffc107;
+	color:#000;
+}
+
+.loginbox a{
+	margin: 0 20px;
+	text-decoration: none;
+	font-size: 12px;
+	line-height: 20px;
+	color: darkgrey;
+}
+
+.loginbox a:hover{
+	color: #ffc107;
+}
+
+
+
+</style>
 
 
 
@@ -12,9 +94,10 @@
 	<form>
 		<p>Username</p>
 		<input type="text" name="" placeholder="Enter Username">
-		
+
 		<p>Password</p>
 		<input type="text" name="" placeholder="Enter Password">
+		<br>
 		<input type="submit" name="" value="Login"><br>
 		<a href="#">Forgot your password</a><br>
 		<a href="#">Do not have an account</a>
@@ -24,7 +107,10 @@
 
 
 
+
 {% endblock %}
+
+
 
 
 
