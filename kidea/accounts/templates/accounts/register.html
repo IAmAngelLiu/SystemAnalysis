@@ -1,0 +1,130 @@
+{% extends 'accounts/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+<style>
+
+body{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+
+.loginbox{
+	width: 320px;
+	height: 820px;
+	background: #000;
+	color: #fff;
+	box-sizing: border-box;
+	margin: 50px 770px;
+}
+
+.loginword{
+	top: 50px;
+	left: calc(50% - 20px);
+}
+
+h1{
+	padding: 20px 0 20px;
+	text-align: center;
+	font-size: 36px;
+}
+
+.loginbox p{
+	margin: 0 20px;
+	padding: 0;
+	font-weight: bold;
+}
+
+.loginbox input{
+	margin: 0 20px;
+	width: 85%;
+	margin-bottom: 20px;
+}
+
+.loginbox input[type="text"], input[type="password"]{
+	outline: none;
+	height: 39px;
+}
+
+.loginbox input[type="submit"]{
+	border: none;
+	outline: none;
+	height: 39px;
+	background: #fb2525;
+	color: #fff;
+	font-size: 18px;
+}
+
+.loginbox input[type="submit"]:hover{
+	cursor:pointer;
+	background: #ffc107;
+	color:#000;
+}
+
+.loginbox a{
+	margin: 0 20px;
+	text-decoration: none;
+	font-size: 12px;
+	line-height: 20px;
+	color: darkgrey;
+}
+
+.loginbox a:hover{
+	color: #ffc107;
+}
+
+
+</style>
+
+
+
+<h1>Register Page</h1>
+
+
+<div class="loginbox">
+	<h1>Register</h1>
+	<form>
+		<p>Username</p>
+		<input type="text" name="" placeholder="Enter Username">
+
+		<p>Address</p>
+		<input type="text" name="" placeholder="Enter Address">
+
+		<p>Mobile Phone Number</p>
+		<input type="text" name="" placeholder="Enter Mobile Phone Number">
+
+		<p>Telephone Number</p>
+		<input type="text" name="" placeholder="Enter Telephone Number">
+
+		<p>Email</p>
+		<input type="text" name="" placeholder="Enter Email">
+
+		<p>Password</p>
+		<input type="text" name="" placeholder="Enter Password">
+
+		<p>Password Again</p>
+		<input type="text" name="" placeholder="Enter Password Again">
+
+
+		<p>Password</p>
+		<input type="text" name="" placeholder="Enter Password">
+		<br>
+		<input type="submit" name="" value="Register"><br>
+		<br>
+		
+	</form>
+</div>
+
+
+
+
+{% endblock %}
+
+
+
+
