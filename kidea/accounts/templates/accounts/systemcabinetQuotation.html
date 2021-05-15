@@ -2,9 +2,120 @@
 
 {% block content %}
 
+<style type="text/css">
+body{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+
+h1{
+	padding: 20px 0 20px;
+	text-align: center;
+	font-size: 36px;
+}
+
+.quotationbox{
+	background: #000;
+	color: #fff;
+	box-sizing: border-box;
+	margin: 50px 550px;
+}
+
+.quotationbox p{
+	margin: 0 100px;
+	padding: 0;
+	font-weight: bold;
+}
+
+.quotationbox input{
+	margin: 0 100px;
+	width: 60%;
+	margin-bottom: 20px;
+}
+
+.quotationbox input[type="text"], input[type="password"]{
+	outline: none;
+	height: 39px;
+}
+
+.quotationbox input[type="submit"]{
+	border: none;
+	outline: none;
+	height: 39px;
+	background: #fb2525;
+	color: #fff;
+	font-size: 18px;
+}
+
+.quotationbox input[type="submit"]:hover{
+	cursor:pointer;
+	background: #ffc107;
+	color:#000;
+}
+
+.quotationbox select{
+	margin-left: 100px;
+	border: none;
+	outline: none;
+	height: 39px;
+	font-size: 18px;
+}
+
+</style>
 
 
 <h1>System Cabinet Quotation Page</h1>
+
+
+
+<div class="quotationbox">
+	<h1>商品報價</h1>
+	<form>
+		<p>寬</p>
+		<input type="text" name="" placeholder="請輸入寬 (單位公分)">
+
+		<p>深</p>
+		<input type="text" name="" placeholder="請輸入深 (單位公分)">
+
+		<p>高</p>
+		<input type="text" name="" placeholder="請輸入高 (單位公分)">
+
+		<p>吊衣桿數量</p>
+		<input type="text" name="" placeholder="請輸入吊衣桿數量">
+
+		<p>抽屜數量</p>
+		<input type="text" name="" placeholder="請輸入抽屜數量">
+
+		<p>拉籃數量</p>
+		<input type="text" name="" placeholder="請輸入拉籃數量">
+		
+
+		<p>顏色</p>
+		<select id="color" name="colors">
+			<option>紅色</option>
+			<option>藍色</option>
+			<option>黃色</option>
+			<option>紫色</option>
+			<option>綠色</option>
+		</select>
+
+		<p>板材</p>
+		<select id="color" name="colors">
+			<option>板材1</option>
+			<option>板材2</option>
+			<option>板材3</option>
+			<option>板材4</option>
+			<option>板材5</option>
+		</select>
+
+		<br>
+		<br>
+		<input type="submit" name="" value="報價"><br>
+		<input type="submit" name="" value="清除設定"><br>
+		
+	</form>
+</div>
 
 
 
