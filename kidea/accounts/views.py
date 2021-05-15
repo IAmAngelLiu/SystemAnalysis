@@ -16,3 +16,15 @@ def register(request):
 def browse(request):
 	return render(request, 'accounts/browse.html')
 
+def quotation(request):
+	return render(request, 'accounts/quotation.html')
+
+def singleproduct(request):
+	return render(request, 'accounts/singleproduct.html')
+
+def systemcabinetQuotation(request):
+	return render(request, 'accounts/systemcabinetQuotation.html')
+
+
+
+

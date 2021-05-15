@@ -6,6 +6,9 @@ urlpatterns = [
     path('login/', views.login),
     path('register/', views.register),
     path('browse/', views.browse),
+    path('quotation/', views.quotation),
+    path('singleproduct/', views.singleproduct),
+    path('systemcabinetQuotation/', views.systemcabinetQuotation),
 ]
 
 
