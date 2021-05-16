@@ -3,10 +3,10 @@ from django.db import models
 # Create your models here.
 
 class Member(models.Model):
-	name = models.CharField(max_length=200, null=True)
-	phone = models.CharField(max_length=200, null= True)
-	email = models.CharField(max_length=200, null=True)
-	address = models.CharField(max_length=200, null=True)
+	name = models.CharField(primary_key=True, max_length=200)
+	phone = models.CharField(max_length=10)
+	email = models.EmailField(max_length=254)
+	address = models.CharField(max_length=200)
 	date_created = models.DateTimeField(auto_now_add=True)
 
 	def _str_(self):
@@ -22,7 +22,7 @@ class Product(models.Model):
 		)
 		
 
-	name = models.CharField(max_length=200, null=True)
+	name = models.CharField(primary_key=True, max_length=200)
 	price = models.FloatField(null= True)
 	description = models.CharField(max_length=500, null=True)
 	date_created = models.DateTimeField(auto_now_add=True)
