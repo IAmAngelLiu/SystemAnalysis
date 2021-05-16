@@ -14,10 +14,19 @@ class Member(models.Model):
 
 
 class Product(models.Model):
+	TAG = (
+		('衛浴', '衛浴'),
+		('廚房', '廚房'),
+		('系統櫃', '系統櫃'),
+		('其他', '其他'),
+		)
+		
+
 	name = models.CharField(max_length=200, null=True)
 	price = models.FloatField(null= True)
 	description = models.CharField(max_length=500, null=True)
 	date_created = models.DateTimeField(auto_now_add=True)
+	tag = models.CharField(max_length=200, null=True, choices=TAG)
 
 
 

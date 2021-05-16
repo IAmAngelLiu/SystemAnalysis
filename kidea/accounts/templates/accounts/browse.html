@@ -2,6 +2,10 @@
 
 {% block content %}
 
+<style type="text/css">
+
+</style>
+
 
 
 <h1>Browse Page</h1>
@@ -40,67 +44,37 @@
 </button>
 
 
+	<section class="text-center mb-4" id="all">
+		<div class="container" style="padding-top: 50px;"> </div>
+		<div class="row wow fadeIn">
+
+		{% for i in products %}
+
+			<div class="col-lg-3 col-md-6 mb-4">
+				<div class="card">
+					<div class="card-body text-center">
+						<a href="" class="grey-text">
+							<h3>{{i.name}}</h3>
+						</a>
+							<h5>類別：{{i.tag}}</h5>
+							<h5>規格：{{i.description}}</h5>
+							
+						
+					</div>
+					<h4 class="font-weight-bold blue-text">
+						價格：{{i.price}}
+					</h4>
+
+				</div>
+			</div>
+		</div>
+		{%endfor%}
+
+	</section>
 
 
 
 
-<!-- <div class="container">
-      <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">商品名稱</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$價格 <small class="text-muted">/ 才</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>商品細節</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">加入購物車</button>
-          </div>
-       </div>
-</div> -->
-
-
-<!-- <div class="container">
-      <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">商品1</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$價格 <small class="text-muted">/ 才</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>商品細節</li>
-              
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">加入購物車</button>
-          </div>
-        </div>
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">商品2</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$價格 <small class="text-muted">/ 才</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>商品細節</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">加入購物車</button>
-          </div>
-        </div>
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">商品3</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$價格 <small class="text-muted">/ 才</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>商品細節</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">加入購物車</button>
-          </div>
-        </div>
-      </div> -->
 
 
 
