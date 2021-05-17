@@ -9,7 +9,7 @@ class Member(models.Model):
 	address = models.CharField(max_length=200)
 	date_created = models.DateTimeField(auto_now_add=True)
 	# products in shopping cart
-	product = models.ManyToManyField(Product, through='ShoppingCart')
+	product = models.ManyToManyField(Product, through='ShoppingCart', through_fields=('member', 'product'), )
 
 	def _str_(self):
 		return self.name
