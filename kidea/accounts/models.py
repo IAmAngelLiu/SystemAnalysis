@@ -34,7 +34,7 @@ class Product(models.Model):
 class ShoppingCart(models.Model):
 	member = models.ForeignKey(Member, on_delete=models.CASCADE)
 	product = models.ForeignKey(Product, on_delete=models.CASCADE)
-	amount = models.PositiveIntegerField()
+	amount = models.IntegerField()
 
 
 
