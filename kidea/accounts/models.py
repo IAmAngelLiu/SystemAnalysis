@@ -8,6 +8,8 @@ class Member(models.Model):
 	email = models.EmailField(max_length=254)
 	address = models.CharField(max_length=200)
 	date_created = models.DateTimeField(auto_now_add=True)
+	# products in shopping cart
+	product = models.ManyToManyField(Product, through='ShoppingCart')
 
 	def _str_(self):
 		return self.name
@@ -29,7 +31,10 @@ class Product(models.Model):
 	tag = models.CharField(max_length=200, null=True, choices=TAG)
 
 
-
+class ShoppingCart(models.Model):
+	member = models.ForeignKey(Member, on_delete=models.CASCADE)
+	product = models.ForeignKey(Product, on_delete=models.CASCADE)
+	amount = models.PositiveIntegerField()
 
 
 
