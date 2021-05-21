@@ -21,12 +21,15 @@ def browse(request):
 def quotation(request):
 	return render(request, 'accounts/quotation.html')
 
-def singleproduct(request):
+def singleproduct(request, pk):
 	products = Product.objects.all()
-	return render(request, 'accounts/singleproduct.html', {'products':products})
+	pro = Product.objects.get(id=pk)
+	context = {'pro': pro, 'products': products}
+	return render(request, 'accounts/singleproduct.html', context)
 
 def singleproduct2(request, slug, id):
 	product = Product.objects.get(id=id)
+	# product = Product.objects.get_absolute_url(id=id)
 	return render(request, 'accounts/singleproduct2.html', {'product': product})
 
 

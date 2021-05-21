@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -27,6 +28,10 @@ class Product(models.Model):
 	description = models.CharField(max_length=500, null=True)
 	date_created = models.DateTimeField(auto_now_add=True)
 	tag = models.CharField(max_length=200, null=True, choices=TAG)
+	slug = models.SlugField(null=True)
+
+	def get_absolute_url(self):
+		return reverse("singleproduct", args=[str(self.id)])
 
 
 
