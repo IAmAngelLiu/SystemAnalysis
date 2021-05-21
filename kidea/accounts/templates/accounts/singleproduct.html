@@ -20,35 +20,6 @@ body{
 <h1>Single Product Page</h1>
 
 
-<!-- <section class="text-center mb-4" id="all">
-	<div class="container" style="padding-top: 50px;"> </div>
-	<div class="row wow fadeIn">
-
-	{% for i in products %}
-
-		<div class="col-lg-3 col-md-6 mb-4">
-			<div class="card">
-				<div class="card-body text-center">
-					<a href="" class="grey-text">
-						<h3>{{i.name}}</h3>
-					</a>
-						<h5>類別：{{i.tag}}</h5>
-						<h5>規格：{{i.description}}</h5>
-						
-					
-				</div>
-				<h4 class="font-weight-bold blue-text">
-					價格：{{i.price}}
-				</h4>
-
-			</div>
-		</div>
-	</div>
-	{%endfor%}
-
-</section> -->
-
-
 
 <section>
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
@@ -63,7 +34,7 @@ body{
 	      <a class="btn btn-outline-secondary" href="{% url 'browse' %}">回到上一頁</a>
 
 	      {% if pro.tag == "系統櫃" %}
-	      <a class="btn btn-outline-secondary" href="{% url 'systemcabinetQuotation' %}">報價</a>
+	      <a class="btn btn-outline-secondary" href="{% url 'systemcabinetQuotation' %}">客製化報價</a>
 
 	      {% endif %}
 
