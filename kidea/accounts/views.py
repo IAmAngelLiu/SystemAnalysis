@@ -27,6 +27,11 @@ def singleproduct(request, name):
 	product = Product.objects.get(name=product_name)
 	return render(request, 'accounts/singleproduct.html', {'product':product})
 
+def singleproduct2(request, slug, id):
+	product = Product.objects.get(id=id)
+	return render(request, 'accounts/singleproduct2.html', {'product': product})
+
+
 def systemcabinetQuotation(request):
 	return render(request, 'accounts/systemcabinetQuotation.html')
 

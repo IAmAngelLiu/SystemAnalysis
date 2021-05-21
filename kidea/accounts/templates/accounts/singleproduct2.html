@@ -1,0 +1,82 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+
+<style type="text/css">
+h1{
+	padding: 20px 20px 20px;
+	font-size: 36px;
+}
+body{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+</style>
+
+
+<h1>詳細商品資訊</h1>
+<h1>Single Product Page 2</h1>
+
+
+<!-- <section class="text-center mb-4" id="all">
+	<div class="container" style="padding-top: 50px;"> </div>
+	<div class="row wow fadeIn">
+
+	{% for i in products %}
+
+		<div class="col-lg-3 col-md-6 mb-4">
+			<div class="card">
+				<div class="card-body text-center">
+					<a href="" class="grey-text">
+						<h3>{{i.name}}</h3>
+					</a>
+						<h5>類別：{{i.tag}}</h5>
+						<h5>規格：{{i.description}}</h5>
+						
+					
+				</div>
+				<h4 class="font-weight-bold blue-text">
+					價格：{{i.price}}
+				</h4>
+
+			</div>
+		</div>
+	</div>
+	{%endfor%}
+
+</section> -->
+
+
+
+<section>
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+	{% for i in products %}
+    	
+      <h1 class="display-4 fw-normal">{{product.name}}</h1>
+      <h1 class="display-4 fw-normal">{{i.name}}</h1>
+      <p class="lead fw-normal">規格：{{i.description}}</p>
+      <p class="lead fw-normal">價格：{{i.price}}</p>
+      <p class="lead fw-normal">類別：{{i.tag}}</p>
+      <a class="btn btn-outline-secondary" href="#">加入購物車</a>
+      <a class="btn btn-outline-secondary" href="#">回到上一頁</a>
+    {%endfor%}
+    </div>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block">
+    	
+    </div>
+  </div>
+ </section>
+
+
+
+
+
+{% endblock %}
+
+
+
+
