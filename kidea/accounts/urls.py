@@ -7,7 +7,7 @@ urlpatterns = [
     path('register/', views.register, name="register"),
     path('browse/', views.browse, name="browse"),
     path('quotation/', views.quotation, name="quotation"),
-    path('singleproduct/<str:name>', views.singleproduct, name="singleproduct"),
+    path('singleproduct/<str:pk>/', views.singleproduct, name="singleproduct"),
     path('systemcabinetQuotation/', views.systemcabinetQuotation, name="systemcabinetQuotation"),
     path('singleproduct2/<str:slug>/<int:id>', views.singleproduct2, name="singleproduct2"),
 ]

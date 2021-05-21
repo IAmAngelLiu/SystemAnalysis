@@ -3,11 +3,29 @@
 {% block content %}
 
 
+<style type="text/css">
 
-<h1>Home Page</h1>
+h1{
+	text-align: center;
+}
+
+#goshopping{
+	width: 100px;
+	margin: auto;
+	text-align: center;
+}	
+
+</style>
+
+
 <h1>奇玓衛浴 Kidea</h1>
+<h1>    </h1>
 
+<div class="navbar-nav" id="goshopping">
+  <a class="list-group-item list-group-item-action list-group-item-primary" href="{% url 'browse' %}">去逛逛 <span class="sr-only">(current)</span></a>
+</div>
 
+<h1></h1>
 
 
 {% endblock %}
