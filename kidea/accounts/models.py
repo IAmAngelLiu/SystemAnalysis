@@ -8,9 +8,7 @@ class Member(models.Model):
 	email = models.EmailField(max_length=254)
 	address = models.CharField(max_length=200)
 	date_created = models.DateTimeField(auto_now_add=True)
-	# products in shopping cart
-	product = models.ManyToManyField(Product, through='ShoppingCart', through_fields=('member', 'product'), )
-
+	
 	def _str_(self):
 		return self.name
 
@@ -29,12 +27,6 @@ class Product(models.Model):
 	description = models.CharField(max_length=500, null=True)
 	date_created = models.DateTimeField(auto_now_add=True)
 	tag = models.CharField(max_length=200, null=True, choices=TAG)
-
-
-class ShoppingCart(models.Model):
-	member = models.ForeignKey(Member, on_delete=models.SET_NULL)
-	product = models.ForeignKey(Product, on_delete=models.SET_NULL)
-	amount = models.IntegerField()
 
 
 
