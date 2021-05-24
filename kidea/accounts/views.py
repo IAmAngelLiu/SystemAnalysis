@@ -21,9 +21,11 @@ def browse(request):
 def quotation(request):
 	return render(request, 'accounts/quotation.html')
 
-def singleproduct(request):
-	products = Product.objects.all()
-	return render(request, 'accounts/singleproduct.html', {'products':products})
+def singleproduct(request, name):
+	product_name = name
+
+	product = Product.objects.get(name=product_name)
+	return render(request, 'accounts/singleproduct.html', {'product':product})
 
 def systemcabinetQuotation(request):
 	return render(request, 'accounts/systemcabinetQuotation.html')

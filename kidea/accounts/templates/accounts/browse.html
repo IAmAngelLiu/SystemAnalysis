@@ -12,65 +12,50 @@
 <h1>奇玓衛浴 Kidea</h1>
 
 
-<button
-  type="button"
-  class="btn btn-outline-primary btn-rounded"
-  data-mdb-ripple-color="dark">
-  全部
+<button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">
+	全部
 </button>
-<button
-  type="button"
-  class="btn btn-outline-secondary btn-rounded"
-  data-mdb-ripple-color="dark">
-  衛浴
+<button type="button" class="btn btn-outline-secondary btn-rounded" data-mdb-ripple-color="dark">
+	衛浴
 </button>
-<button
-  type="button"
-  class="btn btn-outline-success btn-rounded"
-  data-mdb-ripple-color="dark">
-  廚房
+<button type="button" class="btn btn-outline-success btn-rounded" data-mdb-ripple-color="dark">
+	廚房
 </button>
-<button
-  type="button"
-  class="btn btn-outline-danger btn-rounded"
-  data-mdb-ripple-color="dark">
-  系統櫃
+<button type="button" class="btn btn-outline-danger btn-rounded" data-mdb-ripple-color="dark">
+	系統櫃
 </button>
-<button
-  type="button"
-  class="btn btn-outline-warning btn-rounded"
-  data-mdb-ripple-color="dark">
-  其他
+<button type="button" class="btn btn-outline-warning btn-rounded" data-mdb-ripple-color="dark">
+	其他
 </button>
 
 
-	<section class="text-center mb-4" id="all">
-		<div class="container" style="padding-top: 50px;"> </div>
-		<div class="row wow fadeIn">
+<section class="text-center mb-4" id="all">
+	<div class="container" style="padding-top: 50px;"> </div>
+	<div class="row wow fadeIn">
 
 		{% for i in products %}
 
-			<div class="col-lg-3 col-md-6 mb-4">
-				<div class="card">
-					<div class="card-body text-center">
-						<a href="" class="grey-text">
-							<h3>{{i.name}}</h3>
-						</a>
-							<h5>類別：{{i.tag}}</h5>
-							<h5>規格：{{i.description}}</h5>
-							
-						
-					</div>
-					<h4 class="font-weight-bold blue-text">
-						價格：{{i.price}}
-					</h4>
+		<div class="col-lg-3 col-md-6 mb-4">
+			<div class="card">
+				<div class="card-body text-center">
+					<a href="{% url 'singleproduct' name=i.name %}" class="grey-text">
+						<h3>{{i.name}}</h3>
+					</a>
+					<h5>類別：{{i.tag}}</h5>
+					<h5>規格：{{i.description}}</h5>
+
 
 				</div>
+				<h4 class="font-weight-bold blue-text">
+					價格：{{i.price}}
+				</h4>
+
 			</div>
 		</div>
-		{%endfor%}
+	</div>
+	{%endfor%}
 
-	</section>
+</section>
 
 
 
@@ -85,7 +70,3 @@
 
 
 {% endblock %}
-
-
-
-
