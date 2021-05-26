@@ -1,0 +1,54 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+
+<style type="text/css">
+h1{
+  padding: 20px 20px 20px;
+  font-size: 36px;
+}
+body{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+</style>
+
+
+<h1>詳細商品資訊</h1>
+<h1>Single Product Page</h1>
+
+
+
+<section>
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+
+
+      <h1 class="display-4 fw-normal">{{pro.name}}</h1>
+        <p class="lead fw-normal">規格：{{pro.description}}</p>
+        <p class="lead fw-normal">價格：{{pro.price}}</p>
+        <p class="lead fw-normal">類別：{{pro.tag}}</p>
+        <a class="btn btn-outline-secondary" href="#">加入購物車</a>
+        <a class="btn btn-outline-secondary" href="{% url 'browse' %}">回到上一頁</a>
+
+        {% if pro.tag == "系統櫃" %}
+        <a class="btn btn-outline-secondary" href="{% url 'systemcabinetQuotation' %}">客製化報價</a>
+
+        {% endif %}
+
+
+    </div>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block">
+      
+    </div>
+  </div>
+ </section>
+
+
+
+
+
+{% endblock %}

@@ -2,105 +2,299 @@
 
 {% block content %}
 
+<style type="text/css">
+ul{
+  width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+ul li{
+  /*display: inline-block;*/
+  display:inline;
+  float: left;
+  list-style: none;
+}
+
+ul li a{
+  text-align: center;
+}
 
 
-<h1>Browse Page</h1>
+.tagbar a{
+  overflow: hidden;
+  white-space: nowrap;
+  width: 300px;
+}
+
+.tagbar2 a{
+  overflow: hidden;
+  white-space: nowrap;
+  width: 300px;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+#menu{
+  position: fixed;
+  right: 0;
+}
+
+#all{
+    margin-left: 350px;
+    margin-right: 350px;
+}
+
+#bathroom{
+    margin-left: 350px;
+    margin-right: 350px;
+}
+
+#kitchen{
+    margin-left: 350px;
+    margin-right: 350px;
+}
+
+#cabinet{
+  margin-left: 350px;
+    margin-right: 350px;
+}
+
+#others{
+    margin-left: 350px;
+    margin-right: 350px;
+}
+
+h1{
+  margin: 20px;
+  text-align: center;
+}
+
+
+
+</style>
+
+
+
+
 <h1>奇玓衛浴 Kidea</h1>
+<h1>瀏覽所有產品</h1>
 
 
-<button
-  type="button"
-  class="btn btn-outline-primary btn-rounded"
-  data-mdb-ripple-color="dark">
-  全部
-</button>
-<button
-  type="button"
-  class="btn btn-outline-secondary btn-rounded"
-  data-mdb-ripple-color="dark">
-  衛浴
-</button>
-<button
-  type="button"
-  class="btn btn-outline-success btn-rounded"
-  data-mdb-ripple-color="dark">
-  廚房
-</button>
-<button
-  type="button"
-  class="btn btn-outline-danger btn-rounded"
-  data-mdb-ripple-color="dark">
-  系統櫃
-</button>
-<button
-  type="button"
-  class="btn btn-outline-warning btn-rounded"
-  data-mdb-ripple-color="dark">
-  其他
-</button>
+
+<div class="tagbar2" id="menu">
+<ul class="navbar-nav mr-auto">
+  <li class="nav-item active">
+    <a class="list-group-item list-group-item-action list-group-item-primary" href="#all">全     部
+      <span class="sr-only">(current)</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="list-group-item list-group-item-action list-group-item-danger" href="#bathroom">衛     浴</a>
+  </li>
+  <li class="nav-item">
+    <a class="list-group-item list-group-item-action list-group-item-warning" href="#kitchen">廚     房</a>
+  </li>
+  <li class="nav-item">
+    <a class="list-group-item list-group-item-action list-group-item-success" href="#cabinet">系    統    櫃</a>
+  </li>
+  <li class="nav-item">
+    <a class="list-group-item list-group-item-action list-group-item-info" href="#others">其     他</a>
+  </li>
+</ul>
+</div>
 
 
 
 
 
 
-<!-- <div class="container">
-      <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">商品名稱</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$價格 <small class="text-muted">/ 才</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>商品細節</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">加入購物車</button>
-          </div>
-       </div>
+
+<!-- <div class="w3-container w3-padding ws-css-exercises">
+  <div class="w3-bar w3-margin-bottom">
+    <a class="w3-bar-item w3-btn" href="#all" target="_blank">全部</a>
+    <a class="w3-bar-item w3-btn" href="#bathroom" target="_blank">衛浴</a>
+    <a class="w3-bar-item w3-btn" href="#kitchen" target="_blank">廚房</a>
+    <a class="w3-bar-item w3-btn" href="" target="_blank">系統櫃</a>
+    <a class="w3-bar-item w3-btn" href="#others" target="_blank">其他</a>
+  </div>
 </div> -->
 
 
-<!-- <div class="container">
-      <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">商品1</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$價格 <small class="text-muted">/ 才</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>商品細節</li>
+
+
+
+
+
+  
+  <section class="text-center mb-4" id="all">
+    <div class="container" style="padding-top: 50px;"> </div>
+    <div class="center">
+
+    {% for i in products %}
+
+      <div class="center"> <!-- ??? -->
+        <div class="card">
+          <div class="card-body text-center">
+            <a href="{{i.get_absolute_url}}" class="grey-text">
+              <h3>{{i.name}}</h3>
+            </a>
+              <h5>類別：{{i.tag}}</h5>
+              <h5>規格：{{i.description}}</h5>
               
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">加入購物車</button>
+            
           </div>
+          <h4 class="font-weight-bold blue-text">
+            價格：{{i.price}}
+          </h4>
+
         </div>
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">商品2</h4>
+      </div>
+    </div>
+    {%endfor%}
+
+  </section>
+
+
+
+
+  <section class="text-center mb-4" id="bathroom">
+    <div class="container" style="padding-top: 50px;"> </div>
+    <h2>衛浴</h2>
+    <div class="center">
+
+    {% for i in products %}
+      {% if i.tag == "衛浴" %}
+
+      <div class="center">
+        <div class="card">
+          <div class="card-body text-center">
+            <a href="{{i.get_absolute_url}}" class="grey-text">
+              <h3>{{i.name}}</h3>
+            </a>
+              <h5>類別：{{i.tag}}</h5>
+              <h5>規格：{{i.description}}</h5>
+              
+            
           </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$價格 <small class="text-muted">/ 才</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>商品細節</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">加入購物車</button>
-          </div>
+          <h4 class="font-weight-bold blue-text">
+            價格：{{i.price}}
+          </h4>
+
         </div>
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">商品3</h4>
+      </div>
+    </div>
+    {% endif %}
+    {%endfor%}
+
+  </section>
+
+
+
+  <section class="text-center mb-4" id="kitchen">
+    <div class="container" style="padding-top: 50px;"> </div>
+    <h2>廚房</h2>
+    <div class="center">
+
+    {% for i in products %}
+      {% if i.tag == "廚房" %}
+
+      <div class="center">
+        <div class="card">
+          <div class="card-body text-center">
+            <a href="{{i.get_absolute_url}}" class="grey-text">
+              <h3>{{i.name}}</h3>
+            </a>
+              <h5>類別：{{i.tag}}</h5>
+              <h5>規格：{{i.description}}</h5>
+              
+            
           </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$價格 <small class="text-muted">/ 才</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>商品細節</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">加入購物車</button>
-          </div>
+          <h4 class="font-weight-bold blue-text">
+            價格：{{i.price}}
+          </h4>
+
         </div>
-      </div> -->
+      </div>
+    </div>
+    {% endif %}
+    {%endfor%}
+
+  </section>
+
+
+
+  <section class="text-center mb-4" id="cabinet">
+    <div class="container" style="padding-top: 50px;"> </div>
+    <h2>系統櫃</h2>
+    <div class="center">
+
+    {% for i in products %}
+      {% if i.tag == "系統櫃" %}
+
+      <div class="center">
+        <div class="card">
+          <div class="card-body text-center">
+            <a href="{{i.get_absolute_url}}" class="grey-text">
+              <h3>{{i.name}}</h3>
+            </a>
+              <h5>類別：{{i.tag}}</h5>
+              <h5>規格：{{i.description}}</h5>
+              
+            
+          </div>
+          <h4 class="font-weight-bold blue-text">
+            價格：{{i.price}}
+          </h4>
+
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {%endfor%}
+
+  </section>
+
+
+
+
+
+  <section class="text-center mb-4" id="others">
+    <div class="container" style="padding-top: 50px;"> </div>
+    <h2>其他</h2>
+    <div class="center">
+
+    {% for i in products %}
+      {% if i.tag == "其他" %}
+
+      <div class="center">
+        <div class="card">
+          <div class="card-body text-center">
+            <a href="{{i.get_absolute_url}}" class="grey-text">
+              <h3>{{i.name}}</h3>
+            </a>
+              <h5>類別：{{i.tag}}</h5>
+              <h5>規格：{{i.description}}</h5>
+              
+            
+          </div>
+          <h4 class="font-weight-bold blue-text">
+            價格：{{i.price}}
+          </h4>
+
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {%endfor%}
+
+  </section>
+
+
+
+
+
 
 
 
@@ -111,7 +305,3 @@
 
 
 {% endblock %}
-
-
-
-

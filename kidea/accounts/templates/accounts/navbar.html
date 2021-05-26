@@ -8,11 +8,24 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#">Login</a>
-      <a class="nav-item nav-link" href="#">Browse</a>
-      <a class="nav-item nav-link" href="#">Shopping Cart</a>
+      <!-- <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>-->
+      <a class="nav-item nav-link active" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      <!-- <a class="nav-item nav-link" href="#">Login</a> -->
+      <!-- <a class="nav-item nav-link" href="#">Browse</a> -->
+      <a class="nav-item nav-link" href="{% url 'browse' %}">Browse</a>
+      <a class="nav-item nav-link" href="{% url 'shopping_cart' %}">Shopping Cart</a>
       <a class="nav-item nav-link" href="#">My Order</a>
+      <!-- <a class="nav-item nav-link" href="#">Register</a> -->
+      <ul class="nav navbar-nav navbar-right">
+
+        {% if request.user.is_authenticated %}
+            <li><a href="#" class="nav-item nav-link"><span class="glyphicon glyphicon-user"></span> Hello {{ request.user.username }}</a>
+            </li>
+            <li><a href="{% url 'logout' %}" class="nav-item nav-link"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}" class="nav-item nav-link"><span class="glyphicon glyphicon-log-in"></span> Login/Register</a></li>
+        {% endif %}
+    </ul>
       
     </div>
   </div>
