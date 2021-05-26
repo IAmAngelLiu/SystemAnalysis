@@ -23,8 +23,8 @@ class Product(models.Model):
 		)
 		
 
-	name = models.CharField(primary_key=True, max_length=200)
-	price = models.FloatField(null= True)
+	name = models.CharField(max_length=200, null=True)
+	price = models.CharField(max_length=200, null= True)
 	description = models.CharField(max_length=500, null=True)
 	date_created = models.DateTimeField(auto_now_add=True)
 	tag = models.CharField(max_length=200, null=True, choices=TAG)
@@ -32,6 +32,20 @@ class Product(models.Model):
 
 	def get_absolute_url(self):
 		return reverse("singleproduct", args=[str(self.id)])
+
+class Board(models.Model):
+	TYPE = (
+		('back', 'back'),
+		('door', 'door'),
+		('others', 'others'),
+	)
+
+	name = models.CharField(max_length=200, null=True)
+	board_type = models.CharField(max_length=200, null=True, choices=TYPE)
+	price = models.FloatField(null=True)
+
+	def _str_(self):
+		return self.name
 
 
 

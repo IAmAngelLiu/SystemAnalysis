@@ -3,72 +3,78 @@
 {% block content %}
 
 <style type="text/css">
-body{
-	margin: 0;
-	padding: 0;
-	font-family: sans-serif;
-}
+	body {
+		margin: 0;
+		padding: 0;
+		font-family: sans-serif;
+	}
 
-h1{
-	padding: 20px 0 20px;
-	text-align: center;
-	font-size: 36px;
-}
+	h1 {
+		padding: 20px 0 20px;
+		text-align: center;
+		font-size: 36px;
+	}
 
-h3{
-	padding: 20px 0 20px;
-	text-align: center;
-	font-size: 20px;
-}
+	h3 {
+		padding: 20px 0 20px;
+		text-align: center;
+		font-size: 20px;
+	}
 
-.quotationbox{
-	width: 500px;
-	background: #000;
-	color: #fff;
-	box-sizing: border-box;
-	margin: auto;
-}
+	.quotationbox {
+		width: 500px;
+		background: #000;
+		color: #fff;
+		box-sizing: border-box;
+		margin: auto;
+	}
 
-.quotationbox p{
-	margin: 0 100px;
-	padding: 0;
-	font-weight: bold;
-}
+	.error {
+		color: #fb2525;
+	}
 
-.quotationbox input{
-	margin: 0 100px;
-	width: 60%;
-	margin-bottom: 20px;
-}
+	.quotationbox p {
+		margin: 0 100px;
+		padding: 0;
+		font-weight: bold;
+	}
 
-.quotationbox input[type="text"], input[type="password"]{
-	outline: none;
-	height: 39px;
-}
+	.quotationbox input,
+	button {
+		margin: 0 100px;
+		width: 60%;
+		margin-bottom: 20px;
+	}
 
-.quotationbox input[type="submit"]{
-	border: none;
-	outline: none;
-	height: 39px;
-	background: #fb2525;
-	color: #fff;
-	font-size: 18px;
-}
+	.quotationbox input[type="text"],
+	input[type="password"] {
+		outline: none;
+		height: 39px;
+	}
 
-.quotationbox input[type="submit"]:hover{
-	cursor:pointer;
-	background: #ffc107;
-	color:#000;
-}
+	.submit-but {
+		border: none;
+		outline: none;
+		height: 39px;
+		background: #fb2525;
+		color: #fff;
+		font-size: 18px;
+	}
 
-.quotationbox select{
-	margin-left: 100px;
-	border: none;
-	outline: none;
-	height: 39px;
-	font-size: 18px;
-}
+	.submit-but:hover {
+		cursor: pointer;
+		background: #ffc107;
+		color: #000;
+	}
 
+	.quotationbox select {
+		margin-left: 100px;
+		border: none;
+		outline: none;
+		height: 39px;
+		font-size: 18px;
+		margin-bottom: 15px;
+	}
 </style>
 
 
@@ -81,26 +87,36 @@ h3{
 <div class="quotationbox">
 	<h1>商品報價</h1>
 
-	<h3 id="result">報價結果：</h3>
-	<form>
+	{% if error %}
+	<h3 class="error">請填寫所有欄位！</h3>
+	{% endif %}
+	<h3 id="result">報價結果：{{ quote_price }}</h3>
+	<form action="{% url 'getSCQuote' %}" method="GET">
 		<p>寬</p>
-		<input type="text" id="width" placeholder="請輸入寬 (單位公分)">
+		<input type="text" id="width" name="width" placeholder="請輸入寬 (單位公分)" value="{{ prev_data.width }}">
 
 		<p>深</p>
-		<input type="text" id="depth" placeholder="請輸入深 (單位公分)">
+		<input type="text" id="depth" name="depth" placeholder="請輸入深 (單位公分)" value="{{ prev_data.depth }}">
 
 		<p>高</p>
-		<input type="text" id="height" placeholder="請輸入高 (單位公分)">
+		<input type="text" id="height" name="height" placeholder="請輸入高 (單位公分)" value="{{ prev_data.height }}">
 
-		<p>吊衣桿數量</p>
+		<p>隔板數量</p>
+		<input type="text" id="partition_cnt" name="partition_cnt" placeholder="請輸入隔板數量"
+			value="{{ prev_data.partition_cnt }}">
+
+		<!-- <p>櫃子數量</p>
+		<input type="text" id="" placeholder="請輸入櫃子數量"> -->
+
+		<!-- <p>吊衣桿數量</p>
 		<input type="text" id="" placeholder="請輸入吊衣桿數量">
 
 		<p>抽屜數量</p>
 		<input type="text" id="" placeholder="請輸入抽屜數量">
 
 		<p>拉籃數量</p>
-		<input type="text" name="" placeholder="請輸入拉籃數量">
-		
+		<input type="text" name="" placeholder="請輸入拉籃數量"> -->
+
 
 		<!-- <p>顏色</p>
 		<select id="color" name="colors">
@@ -111,21 +127,51 @@ h3{
 			<option>綠色</option>
 		</select> -->
 
-		<p>板材</p>
-		<select id="color" name="colors">
-			<option>H1145 ST10</option>
-			<option>H1146 ST10</option>
-			<option>H1277 ST12</option>
-			<option>H1300 ST19</option>
-			<option>H1401 ST22</option>
+		<p>背板板材</p>
+		<select id="board_back" name="board_back">
+			{% for i in boards %}
+			{% if i.board_type == "back" %}
+			{% if i.id == prev_data.id_back %}
+			<option value="{{ i.id }}" selected="selected">{{ i.name }}</option>
+			{% else %}
+			<option value="{{ i.id }}">{{ i.name }}</option>
+			{% endif %}
+			{% endif %}
+			{% endfor %}
+		</select>
+
+		<p>門板板材</p>
+		<select id="board_door" name="board_door">
+			{% for i in boards %}
+			{% if i.board_type == "door" %}
+			{% if i.id == prev_data.id_door %}
+			<option value="{{ i.id }}" selected="selected">{{ i.name }}</option>
+			{% else %}
+			<option value="{{ i.id }}">{{ i.name }}</option>
+			{% endif %}
+			{% endif %}
+			{% endfor %}
+		</select>
+
+		<p>櫃體板材</p>
+		<select id="board_others" name="board_others">
+			{% for i in boards %}
+			{% if i.board_type == "others" %}
+			{% if i.id == prev_data.id_others %}
+			<option value="{{ i.id }}" selected="selected">{{ i.name }}</option>
+			{% else %}
+			<option value="{{ i.id }}">{{ i.name }}</option>
+			{% endif %}
+			{% endif %}
+			{% endfor %}
 		</select>
 
 		<br>
 		<br>
-		<input type="submit" name="" value="報價" onclick="calculateMoney()"><br>
+		<button class="submit-but" type="submit">報價</button><br>
 		<!-- <input type="submit" name="" value="回上一頁" href="{% url 'browse' %}"><br> -->
 
-		
+
 	</form>
 </div>
 
@@ -136,7 +182,3 @@ h3{
 
 
 {% endblock %}
-
-
-
-

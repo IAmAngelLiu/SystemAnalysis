@@ -9,6 +9,7 @@ urlpatterns = [
     path('quotation/', views.quotation, name="quotation"),
     path('singleproduct/<str:pk>/', views.singleproduct, name="singleproduct"),
     path('systemcabinetQuotation/', views.systemcabinetQuotation, name="systemcabinetQuotation"),
+    path('systemcabinetQuotation/getSCQuote', views.getSCQuote, name="getSCQuote"),
     path('singleproduct2/<str:slug>/<int:id>', views.singleproduct2, name="singleproduct2"),
 ]
 
