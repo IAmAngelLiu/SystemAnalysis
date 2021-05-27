@@ -1,16 +1,21 @@
 from django.contrib import admin
-# from .models import Member
 
 # Register your models here.
 
 from .models import Member
 from .models import Product
+from .models import ShoppingCart
 
 class MemberAdmin(admin.ModelAdmin):
     list_display = ('username', 'name', 'address', 'cellphone', 'email', 'is_superuser', 'date_created')
     list_filter = ('is_superuser', )
+    
+class ShoppingCartAdmin(admin.ModelAdmin):
+    list_display = ('member', 'product', 'amount', 'customization')
+    list_filter = ('is_customized', )
 
 admin.site.register(Member, MemberAdmin)
 admin.site.register(Product)
+admin.site.register(ShoppingCart)
 
 

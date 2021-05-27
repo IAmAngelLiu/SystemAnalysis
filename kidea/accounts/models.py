@@ -34,6 +34,7 @@ class Member(AbstractUser):
 	password2 = models.CharField(max_length=20, null=True)
 	is_superuser = models.BooleanField(default=False, null=True)
 	date_created = models.DateTimeField(auto_now_add=True)
+	shoppingCart = models.ManyToManyField('Product', through='ShoppingCart', blank=True)
 
 	USERNAME_FIELD = 'username'
 	REQUIRED_FIELDS = ['email']
@@ -64,6 +65,12 @@ class Product(models.Model):
 		return reverse("singleproduct", args=[str(self.id)])
 
 
+class ShoppingCart(models.Model):
+	member = models.ForeignKey('Member', on_delete=models.CASCADE)
+	product = models.ForeignKey('Product', on_delete=models.CASCADE, blank=True)
+	amount = models.IntegerField()
+	is_customized = models.BooleanField(default=False, null=True)
+	customization = models.CharField(max_length=200, null=True, blank=True, help_text = '寬, 深, 高, 隔板數量, 背板板材, 門板板材, 櫃體板材')
 
 
 
