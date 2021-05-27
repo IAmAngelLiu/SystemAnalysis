@@ -5,19 +5,19 @@ from django.contrib.auth.models import User
 from django.urls import reverse 
 
 class CustomUserManager(BaseUserManager):
-	def _create_user(self,email, username, password, is_superuser):
+	def _create_user(self,email, username, password, is_staff, is_superuser):
 		email = self.normalize_email(email)
-		user = self.model(email=email, username=username, is_superuser=is_superuser)
+		user = self.model(email=email, username=username, is_staff=is_staff, is_superuser=is_superuser)
 		user.set_password(password)
 		user.save(using=self._db)
 		return user
 
 	def create_user(self, email, username, password=None):
-		return self._create_user(email, username, password, False)
+		return self._create_user(email, username, password, False, False)
 
 	def create_superuser(self, email, username, password):
 		email = self.normalize_email(email)
-		user = self.model(email=email, username=username, is_superuser=True)
+		user = self.model(email=email, username=username, is_staff=True, is_superuser=True)
 		user.set_password(password)
 		user.save(using=self._db)
 		return user
