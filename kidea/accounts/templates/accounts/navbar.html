@@ -1,19 +1,39 @@
 {% load static %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="{% url 'home' %}">Kidea 奇玓衛浴</a>
-  <!-- <img src="{% static 'images/logo.png' %}"> -->
+  <a class="navbar-brand" href="#">Kidea 奇玓衛浴</a>
+  <!--<img src="{% static 'images/logo.png' %}">-->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
+      <!-- <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>-->
       <a class="nav-item nav-link active" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+      <!-- <a class="nav-item nav-link" href="#">Login</a> -->
+      <!-- <a class="nav-item nav-link" href="#">Browse</a> -->
       <a class="nav-item nav-link" href="{% url 'browse' %}">Browse</a>
-      <a class="nav-item nav-link" href="#">Shopping Cart</a>
-      <a class="nav-item nav-link" href="#">My Order</a>
+      <ul class="nav navbar-nav navbar-right">
+
+        {% if request.user.is_authenticated %}
+        <li><a class="nav-item nav-link" href="{{request.user.get_user_url}}">Shopping Cart</a></li>
+        {% endif %}
+        <a class="nav-item nav-link" href="#">My Order</a>
+        <!-- <a class="nav-item nav-link" href="#">Register</a> -->
+        <ul class="nav navbar-nav navbar-right">
+
+          {% if request.user.is_authenticated %}
+          <li><a href="#" class="nav-item nav-link"><span class="glyphicon glyphicon-user"></span> Hello {{
+              request.user.username }}</a>
+          </li>
+          <li><a href="{% url 'logout' %}" class="nav-item nav-link"><span class="glyphicon glyphicon-log-out"></span>
+              Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'login' %}" class="nav-item nav-link"><span class="glyphicon glyphicon-log-in"></span>
+              Login/Register</a></li>
+          {% endif %}
+        </ul>
 
     </div>
   </div>

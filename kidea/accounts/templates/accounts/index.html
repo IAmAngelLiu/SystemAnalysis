@@ -4,29 +4,27 @@
 
 
 <style type="text/css">
+	h1 {
+		text-align: center;
+	}
 
-h1{
-	text-align: center;
-}
+	#goshopping {
+		width: 100px;
+		margin: auto;
+		text-align: center;
+	}
 
-#goshopping{
-	width: 100px;
-	margin: auto;
-	text-align: center;
-}	
+	#title {
+		text-align: center;
+	}
 
-#title{
-	text-align: center;
-}
+	#des {
+		text-align: center;
+	}
 
-#des{
-	text-align: center;
-}
-
-#con{
-	text-align: center;
-}
-
+	#con {
+		text-align: center;
+	}
 </style>
 
 
@@ -35,14 +33,11 @@ h1{
 <p id="con">您可以選購標準化的產品，也可以針對系統櫃進行客製化，在本網站上，您可以瀏覽商品，查看產品資訊與價格，網站也可以針對客製化之系統櫃進行報價。</p>
 
 <div class="navbar-nav" id="goshopping">
-  <a class="list-group-item list-group-item-action list-group-item-primary" href="{% url 'browse' %}">去逛逛 <span class="sr-only">(current)</span></a>
+	<a class="list-group-item list-group-item-action list-group-item-primary" href="{% url 'browse' %}">去逛逛 <span
+			class="sr-only">(current)</span></a>
 </div>
 
 <h1></h1>
 
 
 {% endblock %}
-
-
-
-

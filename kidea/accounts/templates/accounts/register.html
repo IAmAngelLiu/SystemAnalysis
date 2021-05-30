@@ -1,5 +1,5 @@
 {% extends 'accounts/main.html' %}
-
+{% load bootstrap3 %}
 {% load static %}
 
 {% block content %}
@@ -7,86 +7,84 @@
 
 
 <style>
+	body {
+		margin: 0;
+		padding: 0;
+		font-family: sans-serif;
+	}
 
-body{
-	margin: 0;
-	padding: 0;
-	font-family: sans-serif;
-}
+	.loginbox {
+		width: 320px;
+		height: 800px;
+		background: #000;
+		color: #fff;
+		box-sizing: border-box;
+		margin: 50px 550px;
+	}
 
-.loginbox{
-	width: 320px;
-	height: 800px;
-	background: #000;
-	color: #fff;
-	box-sizing: border-box;
-	margin: auto;
-}
+	.loginword {
+		top: 50px;
+		left: calc(50% - 20px);
+	}
 
-.loginword{
-	top: 50px;
-	left: calc(50% - 20px);
-}
+	h1 {
+		padding: 20px 0 20px;
+		text-align: center;
+		font-size: 36px;
+	}
 
-h1{
-	padding: 20px 0 20px;
-	text-align: center;
-	font-size: 36px;
-}
+	.loginbox p {
+		margin: 0 20px;
+		padding: 0;
+		font-weight: bold;
+	}
 
-.loginbox p{
-	margin: 0 20px;
-	padding: 0;
-	font-weight: bold;
-}
+	.loginbox input {
+		margin: 0 20px;
+		width: 85%;
+		margin-bottom: 20px;
+	}
 
-.loginbox input{
-	margin: 0 20px;
-	width: 85%;
-	margin-bottom: 20px;
-}
+	.loginbox input[type="text"],
+	input[type="password"] {
+		outline: none;
+		height: 39px;
+	}
 
-.loginbox input[type="text"], input[type="password"]{
-	outline: none;
-	height: 39px;
-}
+	.loginbox input[type="submit"] {
+		border: none;
+		outline: none;
+		height: 39px;
+		background: #fb2525;
+		color: #fff;
+		font-size: 18px;
+	}
 
-.loginbox input[type="submit"]{
-	border: none;
-	outline: none;
-	height: 39px;
-	background: #fb2525;
-	color: #fff;
-	font-size: 18px;
-}
+	.loginbox input[type="submit"]:hover {
+		cursor: pointer;
+		background: #ffc107;
+		color: #000;
+	}
 
-.loginbox input[type="submit"]:hover{
-	cursor:pointer;
-	background: #ffc107;
-	color:#000;
-}
+	.loginbox a {
+		margin: 0 20px;
+		text-decoration: none;
+		font-size: 12px;
+		line-height: 20px;
+		color: darkgrey;
+	}
 
-.loginbox a{
-	margin: 0 20px;
-	text-decoration: none;
-	font-size: 12px;
-	line-height: 20px;
-	color: darkgrey;
-}
-
-.loginbox a:hover{
-	color: #ffc107;
-}
-
-
+	.loginbox a:hover {
+		color: #ffc107;
+	}
 </style>
 
 
 
-<h1>Register Page</h1>
+<h1>註冊會員</h1>
 
 
-<div class="loginbox">
+<!-- <div class="loginbox">
 	<h1>Register</h1>
 	<form>
 		<p>Username</p>
@@ -116,13 +114,19 @@ h1{
 		<br>
 		
 	</form>
+</div> -->
+<div style="margin: 20px;">
+	<form action="." method="post" class="form">
+		{% csrf_token %}
+		{% bootstrap_form user_form %}
+		{% buttons %}
+		<button type="submit" class="btn btn-dark">
+			建立會員
+		</button>
+		{% endbuttons %}
+	</form>
 </div>
 
-<h1></h1>
 
 
 {% endblock %}
-
-
-
-

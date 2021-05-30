@@ -1,0 +1,8 @@
+{% extends 'accounts/main.html' %}
+{% block title %}Logged out{% endblock %}
+{% block content %}
+<div style="margin: 20px;">
+  <h1>登出</h1>
+  <h5>您已成功登出。您可以<a href="{% url 'login' %}">再次登入</a>！</h5>
+</div>  
+{% endblock %}
