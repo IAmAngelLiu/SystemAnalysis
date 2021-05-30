@@ -2,108 +2,130 @@
 {% load static %}
 {% load bootstrap3 %}
 {% block title %}
-    Your shopping cart
+Your shopping cart
 {% endblock %}
 
 {% block content %}
-    <h1>Your shopping cart</h1>
+<style type="text/css">
+    .but {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: .25rem;
+        margin-left: 10px;
+    }
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            {# call __len__ #}
-            {% with total_items=cart|length %}
-                {% if cart|length > 0 %}
-                    Your cart:
-                    <a href="{% url "cart:cart_detail" %}">
-                        {# If total_items is 1, the output will be 1 item. #}
-                        {# If total_items is 2, the output will be 2 items. #}
-                        {{ total_items }} item{{ total_items|pluralize }},
-                        ${{ cart.get_total_price }}
-                    </a>
-                {% else %}
-                    Your shopping cart is empty.
-                {% endif %}
-            {% endwith %}
-        </div>
+    .but-row {
+        padding-left: 43%;
+        margin-bottom: 20px;
+    }
+
+    .table-row {
+        padding-left: 15%;
+    }
+
+    .title-row {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 50px;
+    }
+</style>
+{% if request.user.is_authenticated %}
+<div class="panel panel-default title-row">
+    <h1>{{ request.user.username }} 的購物車</h1>
+    <div class="panel-heading">
+        {# call __len__ #}
+        {% with total_items=cart|length %}
+        {% if total_items > 0 %}
+        您的購物車中有 {{total_items}} 項商品
+        {% else %}
+        您的購物車是空的
+        {% endif %}
+        {% endwith %}
     </div>
-
-    <div class="row">
+</div>
+<form action="{% url 'updateAmount' %}" method="POST">
+    <input type="number" id="userID" name="userID" value="{{request.user.id}}" style="display: none;">
+    <div class="row table-row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
             <table class="table table-hover">
                 <thead>
-                {% if cart|length > 0 %}
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th class="text-center">Price</th>
-                    <th class="text-center">Total</th>
-                    <th> </th>
-                </tr>
+                    {% if cart|length > 0 %}
+                    <tr>
+                        <th>商品名稱</th>
+                        <th>數量</th>
+                        <th class="text-center">單價</th>
+                        <th class="text-center">總價</th>
+                        <th> </th>
+                    </tr>
                 </thead>
                 <tbody>
-                {% for item in cart %}
-                    {% with product=item.product %}
-                        <tr>
-                            <td class="col-sm-8 col-md-6">
-                                <div class="media">
-                                    <a class="thumbnail pull-left" href="{{ product.get_absolute_url }}">
-                                        <img class="media-object"
-                                             src="{% if product.image %}{{ product.image.url }}
-                                                  {% else %}{% static "img/no_image.png" %}{% endif %}"
-                                             style="width: 72px; height: 72px;">
-                                    </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading"><a
-                                                href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>
-                                        <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="col-sm-1 col-md-1" style="text-align: center">
-                                <form action="{% url "cart:cart_add" product.id %}" method="post">
-                                    {% csrf_token %}
-                                    {% bootstrap_field item.update_quantity_form.quantity show_label=False %}
-                                    {% bootstrap_field item.update_quantity_form.update %}
-                                    {% buttons %}
-                                        <button type="submit" class="btn btn-success btn-product">
-                                            Update
-                                        </button>
-                                    {% endbuttons %}
-                                </form>
-                            </td>
-
-                            <td class="col-sm-1 col-md-1 text-center"><strong>${{ item.price }}</strong></td>
-                            <td class="col-sm-1 col-md-1 text-center"><strong>${{ item.total_price }}</strong></td>
-
-                            <td class="col-sm-1 col-md-1">
-                                <a href="{% url "cart:cart_remove" product.id %}" class="btn btn-danger">
-                                    <i class="glyphicon glyphicon-remove" aria-hidden="true"></i> Remove
-                                </a>
-                            </td>
-                        </tr>
-                    {% endwith %}
-                {% endfor %}
-                <tr>
-                    <td>  </td>
-                    <td>  </td>
-                    <td>  </td>
-                    <td><h3>Total</h3></td>
-                    <td class="text-right"><h3><strong>${{ cart.get_total_price }}</strong></h3></td>
-                </tr>
-                {% endif %}
-                <tr>
-                    <td>  </td>
-                    <td>  </td>
-                    <td>  </td>
-                    <td>
-                        <a href="{% url 'browse' %}" class="btn btn-default">
-                            Continue Shopping <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-                        </a>
-                    </td>
-                </tr>
+                    {% for item in cart %}
+                    <tr>
+                        <td class="col-sm-6 col-md-4">
+                            <a href="{{item.product.get_absolute_url}}">{{ item.product.name }}</a>
+                        </td>
+                        <td class="col-sm-3 col-md-3" style="text-align: center">
+                            <input type="number" id="productAmount" name="{{item.id}}" value="{{item.amount}}">
+                        </td>
+                        {%if item.is_customized %}
+                        <td class="col-sm-1 col-md-1 text-center">${{ item.price }}</td>
+                        <td class="col-sm-1 col-md-1 text-center">
+                            <strong>${% widthratio item.amount 1 item.price %}</strong>
+                        </td>
+                        {%else%}
+                        <td class="col-sm-1 col-md-1 text-center">${{ item.product.price }}</td>
+                        <td class="col-sm-1 col-md-1 text-center">
+                            <strong>${% widthratio item.amount 1 item.product.price %}</strong>
+                        </td>
+                        {%endif%}
+                        <td class="col-sm-1 col-md-1">
+                            <form action="{% url 'deleteCart' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="number" id="cartID" name="cartID" value="{{item.id}}"
+                                    style="display: none;">
+                                <button class="btn btn-danger" type="submit">刪除</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {%if item.is_customized%}
+                    <tr>
+                        <td>客製化資訊</td>
+                        <td colspan="4">{{item.customization}}</td>
+                    </tr>
+                    {%endif%}
+                    {% endfor %}
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td>
+                            <h3>Total</h3>
+                        </td>
+                        <td class="text-right">
+                            <h3><strong>${{ total_price }}</strong></h3>
+                        </td>
+                    </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </div>
     </div>
+    <div class="row but-row">
+        <button class="btn btn-primary goshopping" type="submit">儲存數量</button>
+        <div class="navbar-nav" class="goshopping">
+            <a class="but" href="{% url 'browse' %}">繼續選購<span class="sr-only">(current)</span></a>
+        </div>
+    </div>
+</form>
+{% else %}
+<h1>請先登入！</h1>
+{% endif %}
 
 {% endblock %}

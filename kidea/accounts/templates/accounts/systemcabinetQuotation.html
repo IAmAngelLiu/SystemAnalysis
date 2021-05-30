@@ -169,12 +169,20 @@
 		<br>
 		<br>
 		<button class="submit-but" type="submit">報價</button><br>
-		<!-- <input type="submit" name="" value="回上一頁" href="{% url 'browse' %}"><br> -->
-
-
 	</form>
+	{% if request.user.is_authenticated and quote_price %}
+	<form action="{% url 'addCart' %}" method="POST">
+		{% csrf_token %}
+		<input type="number" id="productID" name="productID" value="6" style="display: none;">
+		<input type="number" id="userID" name="userID" value="{{request.user.id}}" style="display: none;">
+		<input type="number" id="price" name="price" value="{{quote_price}}" style="display: none;">
+		<input type="text" id="isCustomized" name="isCustomized" value="customized" style="display: none;">
+		<input type="text" id="customizedContent" name="customizedContent" value="{{ customizedContent }}"
+			style="display: none;">
+		<button class="btn btn-primary" type="submit">加入購物車</button>
+	</form>
+	{% endif %}
 </div>
-
 
 <h1></h1>
 

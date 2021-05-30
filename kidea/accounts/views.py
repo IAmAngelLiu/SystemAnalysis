@@ -53,20 +53,58 @@ def browse(request):
 
 @login_required(login_url="/accounts/login")
 def shopping_cart(request, id):
-    cart = ShoppingCart.objects.get(id = id)
-    return render(request, 'shopping_cart/index.html', {'shopping_cart': cart})
+	cart = ShoppingCart.objects.filter(member=id)
+	total = 0
+	for i in cart:
+		if not i.is_customized:
+			total += i.amount * float(i.product.price)
+		else:
+			total += i.amount * float(i.price)
+	return render(request, 'shopping_cart/index.html', {'cart': cart, 'total_price': total })
 
 @login_required(login_url="/accounts/login")
 def shopping_cart_detail(request, account_id):
-    cart = ShoppingCart.objects.get(member=account_id)
-    product = Product.objects.filter(id=cart.product)
-    return render(request, 'shopping_cart/index.html', {'product': product})
+	cart = ShoppingCart.objects.get(member=account_id)
+	product = Product.objects.filter(id=cart.product)
+	return render(request, 'shopping_cart/index.html', {'product': product})
 
 @login_required(login_url="/accounts/login")
-def shopping_cart_remove(request, product_id):
-    aProduct = get_object_or_404(ShoppingCart, product=product_id)
-    aProduct.delete()
-    return redirect("shopping_cart")
+def shopping_cart_remove(request):
+	cartID = request.POST.get('cartID')
+	aCart = get_object_or_404(ShoppingCart, id=cartID)
+	aCart.delete()
+	path = "shopping_cart/" + str(aCart.member.id)
+	return redirect(path)
+
+@login_required(login_url="/accounts/login")
+def add_shopping_cart(request):
+	productID = request.POST.get('productID')
+	userID = request.POST.get('userID')
+	isCustomized = request.POST.get('isCustomized')
+	product = Product.objects.get(id=productID)
+	user = Member.objects.get(id=userID)
+	if(isCustomized == 'customized'):
+		price = request.POST.get('price')
+		customizedContent = request.POST.get('customizedContent')
+		print(price)
+		print(customizedContent)
+		cart = ShoppingCart.objects.create(member=user, product=product, amount=1, price=price, is_customized=True, customization=customizedContent)
+		print(cart)
+	else:
+		cart = ShoppingCart.objects.create(member=user, product=product, amount=1, is_customized=False, customization="")
+	path = "shopping_cart/" + str(userID)
+	return redirect(path)
+
+@login_required(login_url="/accounts/login")
+def update_shopping_cart(request):
+	userID = request.POST.get('userID')
+	carts = ShoppingCart.objects.filter(member=userID)
+	for cart in carts:
+		amount = request.POST.get(str(cart.id))
+		cart.amount = amount
+		cart.save(update_fields=['amount'])
+	path = "shopping_cart/" + str(userID)
+	return redirect(path)
 
 
 def quotation(request):
@@ -121,12 +159,15 @@ def getSCQuote(request):
 	for board in board_info:
 		if board.id == int(id_back):
 			price_back = board.price
+			name_back = board.name
 			cnt += 1
 		elif board.id == int(id_door):
 			price_door = board.price
+			name_door = board.name
 			cnt += 1
 		elif board.id == int(id_others):
 			price_others = board.price
+			name_others = board.name
 			cnt += 1
 		if cnt == 3:
 			break
@@ -144,5 +185,6 @@ def getSCQuote(request):
 	others_part += (width + depth) / 45
 
 	total_price = door_part * price_door + back_part * price_back + others_part * price_others
+	customizedContent = '長: {},寬: {},高: {},隔板數量: {},背板板材: {},門板板材: {},櫃體板材:{}'.format(width, depth, height, partition_cnt, name_back, name_door, name_others)
 
-	return render(request, 'accounts/systemcabinetQuotation.html', { 'boards': board_info, 'quote_price': round(total_price), 'prev_data': prev_data, 'error': False })
+	return render(request, 'accounts/systemcabinetQuotation.html', { 'boards': board_info, 'quote_price': round(total_price), 'prev_data': prev_data, 'error': False, 'customizedContent': customizedContent })

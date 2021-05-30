@@ -14,6 +14,10 @@
 		padding: 0;
 		font-family: sans-serif;
 	}
+
+	form {
+		display: inline;
+	}
 </style>
 
 
@@ -31,12 +35,21 @@
 			<p class="lead fw-normal">規格：{{pro.description}}</p>
 			<p class="lead fw-normal">價格：{{pro.price}}</p>
 			<p class="lead fw-normal">類別：{{pro.tag}}</p>
-			<a class="btn btn-outline-secondary" href="#">加入購物車</a>
+			{% if request.user.is_authenticated %}
+			{% if pro.tag != "系統櫃" %}
+			<form action="{% url 'addCart' %}" method="POST">
+				{% csrf_token %}
+				<input type="number" id="productID" name="productID" value="{{pro.id}}" style="display: none;">
+				<input type="number" id="userID" name="userID" value="{{request.user.id}}" style="display: none;">
+				<input type="text" id="isCustomized" name="isCustomized" value="notCustomized" style="display: none;">
+				<button class="btn btn-outline-secondary" type="submit">加入購物車</button>
+			</form>
+			{% endif %}
+			{% endif %}
 			<a class="btn btn-outline-secondary" href="{% url 'browse' %}">回到上一頁</a>
 
 			{% if pro.tag == "系統櫃" %}
 			<a class="btn btn-outline-secondary" href="{% url 'systemcabinetQuotation' %}">客製化報價</a>
-
 			{% endif %}
 
 

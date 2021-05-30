@@ -24,6 +24,9 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='accounts/logout.html'), name="logout"),
     path('quotation/', views.quotation, name="quotation"),
     path('shopping_cart/<int:id>/', views.shopping_cart, name='shopping_cart'),
+    path('deleteCart', views.shopping_cart_remove, name='deleteCart'),
+    path('addCart', views.add_shopping_cart, name='addCart'),
+    path('updateAmount', views.update_shopping_cart, name='updateAmount'),
 
     #url(r'^$', views.dashboard, name='dashboard'),
     #url(r'^register/$', views.register, name='register'),
