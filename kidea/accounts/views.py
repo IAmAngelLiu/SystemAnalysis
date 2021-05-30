@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
-from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, UserRegistrationForm
 from django import forms
 from django.contrib import messages
@@ -49,9 +49,6 @@ def login(request):
     # if not user:
     return render(request, 'accounts/login.html', context)
 
-def shopping_cart(request):
-    return render(request, 'shopping_cart/index.html')
-
 def browse(request):
     products = Product.objects.all()
     return render(request, 'accounts/browse.html', {'products':products})
@@ -72,3 +69,28 @@ def singleproduct2(request, slug, id):
 
 def systemcabinetQuotation(request):
     return render(request, 'accounts/systemcabinetQuotation.html')
+
+
+
+# def shopping_cart(request):
+#     return render(request, 'shopping_cart/index.html')
+
+
+@login_required(login_url="/accounts/login")
+def shopping_cart(request, id):
+    cart = ShoppingCart.objects.get(id = id)
+    return render(request, 'shopping_cart/index.html', {'shopping_cart': cart})
+
+@login_required(login_url="/accounts/login")
+def shopping_cart_detail(request, account_id):
+    cart = ShoppingCart.objects.get(member=account_id)
+    product = Product.objects.filter(id=cart.product)
+    return render(request, 'shopping_cart/index.html', {'product': product})
+
+@login_required(login_url="/accounts/login")
+def shopping_cart_remove(request, product_id):
+    aProduct = get_object_or_404(ShoppingCart, product=product_id)
+    aProduct.delete()
+    return redirect("shopping_cart")
+
+

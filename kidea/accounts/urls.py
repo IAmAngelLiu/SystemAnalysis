@@ -22,7 +22,7 @@ urlpatterns = [
     path('singleproduct/<str:pk>/', views.singleproduct, name="singleproduct"),
     path('systemcabinetQuotation/', views.systemcabinetQuotation, name="systemcabinetQuotation"),
     path('singleproduct2/<str:slug>/<int:id>', views.singleproduct2, name="singleproduct2"),
-    path('shopping_cart/', views.shopping_cart, name='shopping_cart'),
+    path('shopping_cart/<int:id>/', views.shopping_cart, name='shopping_cart'),
 
     #url(r'^$', views.dashboard, name='dashboard'),
     #url(r'^register/$', views.register, name='register'),

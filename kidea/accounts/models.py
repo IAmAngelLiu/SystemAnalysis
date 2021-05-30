@@ -44,6 +44,9 @@ class Member(AbstractUser):
 	def __str__(self):
 		return self.username
 
+	def get_user_url(self):
+		return reverse("shopping_cart", args=[str(self.id)])
+
 
 class Product(models.Model):
 	TAG = (
@@ -63,6 +66,7 @@ class Product(models.Model):
 
 	def get_absolute_url(self):
 		return reverse("singleproduct", args=[str(self.id)])
+	
 
 
 class ShoppingCart(models.Model):

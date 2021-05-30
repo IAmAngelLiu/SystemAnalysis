@@ -13,7 +13,11 @@
       <!-- <a class="nav-item nav-link" href="#">Login</a> -->
       <!-- <a class="nav-item nav-link" href="#">Browse</a> -->
       <a class="nav-item nav-link" href="{% url 'browse' %}">Browse</a>
-      <a class="nav-item nav-link" href="{% url 'shopping_cart' %}">Shopping Cart</a>
+      <ul class="nav navbar-nav navbar-right">
+
+        {% if request.user.is_authenticated %}
+            <li><a class="nav-item nav-link" href="{{request.user.get_user_url}}">Shopping Cart</a></li>
+        {% endif %}
       <a class="nav-item nav-link" href="#">My Order</a>
       <!-- <a class="nav-item nav-link" href="#">Register</a> -->
       <ul class="nav navbar-nav navbar-right">
