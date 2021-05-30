@@ -26,11 +26,12 @@
             {% endwith %}
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
             <table class="table table-hover">
                 <thead>
+                {% if cart|length > 0 %}
                 <tr>
                     <th>Product</th>
                     <th>Quantity</th>
@@ -89,6 +90,7 @@
                     <td><h3>Total</h3></td>
                     <td class="text-right"><h3><strong>${{ cart.get_total_price }}</strong></h3></td>
                 </tr>
+                {% endif %}
                 <tr>
                     <td>  </td>
                     <td>  </td>
